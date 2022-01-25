@@ -16,6 +16,7 @@ def get_dict_avg(dic):
 ## 2. 혈액형 분류하기
 
 ```python
+# 방법 1
 def count_blood(L):
     dic = {}
     blood_type = ['A', 'B', 'P', 'AB']
@@ -23,5 +24,17 @@ def count_blood(L):
         dic[key] = L.count(key)
     return dic
 
+```
+
+```python
+# 방법 2
+def count_blood(L):
+    result = {}
+    for blood in blood_list:
+        if blood not in result:
+            result[blood] = 1
+        else:
+            result[blood] += 1
+    return result
 ```
 
