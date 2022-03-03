@@ -33,7 +33,7 @@ path('ssafy/', views.saffy)
 
    ```django
    {% for post in posts %}
-     <p>{{ forloop.counter }}번 글 : {{ post }}</p>
+     <p>{{ forloop.counter0 }}번 글 : {{ post }}</p>
    {% endfor %}
    ```
 
