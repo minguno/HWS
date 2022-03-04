@@ -77,4 +77,4 @@ path('ssafy/', views.saffy)
 
 1. form 태그의 속성인 action의 역할은 입력 데이터가 전송될 URL을 지정하는 것이다
 2. form 태그에서 method는 입력 데이터 전달 방식을 지정, 다른 의미론 주어진 리소스가 수행할 작업을 나타내고 `GET`, `POST`, `PUT`, `DELETE` 등 종류가 다양하다. 요청에 의해 서버로부터 응답 받은 정보를 조회하는데 사용하는 요청의 방식으로 HTML 문서 한 장을 받는 것이 `GET`이다.
-3. `/create/`
+3. `https://127.0.0.1:8000/create/?title=안녕하세요&content=반갑습니다&my-site=파이팅`
