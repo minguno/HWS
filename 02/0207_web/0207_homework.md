@@ -12,7 +12,13 @@
 <button type="submit" class="btn btn-success">Sign in</button>
 ```
 
-a) `btn`: `button` 요소와 함께 쓰이도록 설정된 클래스 (`a`나 `input` 요소와도 함께 사용 가능하다)
+a) `btn btn-success`: 
+
+​	-> `btn`: `button` 요소와 함께 쓰이도록 설정된 클래스 (`a`나 `input` 요소와도 함께 사용 가능하다)
+
+​	-> `btn-success`: 바탕색이 `success` 색감으로 fill 되어있는 버튼
+
+
 
 ## 2. Components: Navbar
 

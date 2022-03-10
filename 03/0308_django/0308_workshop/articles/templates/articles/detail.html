@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4 pb-4">DETAIL</h1>
+
+<p>TITLE: {{ article.title }} </p>
+<p>CONTENT: {{ article.content }}</p>
+<p>CREATED ON: {{ article.created_at }}</p>
+{% endblock content %}
