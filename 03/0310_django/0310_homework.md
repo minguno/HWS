@@ -26,6 +26,20 @@ $ python manage.py migrate
 
 DB에 table이 옮겨진다
 
+### 추가로 알아두면 좋은 명령어
+
+지정 마이그레이션의 SQL 내역
+
+```bash
+$ python manage.py sqlmigrate <app_name> <migration_name>
+```
+
+마이그레이션 적용 현황을 보여주는 명령어
+
+```bash
+$ python manage.py showmigrations <app_name>
+```
+
 ## 2. New
 
 ```python
