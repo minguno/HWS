@@ -297,16 +297,27 @@ def update(request, article_pk):
 <p>수정일: {{ article.updated_at }}</p>
 
 <div>
-  <a href="{% url 'articles:edit' article.pk %}">EDIT</a>
-  <a href="{% url 'articles:delete' article.pk %}">DELETE</a>
+  <a class="text-decoration-none" href="{% url 'articles:edit' article.pk %}">
+    <button class="p-0 border-0 btn btn-link">EDIT</button>
+  </a>
+  <form class="d-inline" action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="p-0 border-0 btn btn-link">DELETE</button>
+  </form>
 </div>
 <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock content %}
 ```
 
-제공된 이미지와 같아지도록 수정, 삭제, 뒤로가기 버튼을 다 a 태그로 만들어준다
+수정 버튼은 a 태그로, DB에 직접적인 변화를 주는 삭제 버튼은 form 태그로 감싸 POST 메서드를 설정해준다
 
-또한 뒤로가기 버튼만 아래줄에 내려가도록 div 태그로 수정, 삭제 버튼을 감싸준다
+둘의 baseline이 같아지게 수정 버튼도 a 태그 안에 button 태그로 한 번 더 감싸준다
+
+button 태그가 제공된 이미지와 서식이 같아지도록 `.btn.btn-link`로 font decoration을 a 태그와 같이 설정해주고 불필요한 공간을 `.p-0.border-0` 으로 없애준다
+
+뒤로가기 버튼만 아래줄에 내려가도록 div 태그로 수정, 삭제 버튼을 감싸준다
+
+form 태그는 block 요소로 분류되기 때문에 `.d-inline`으로 인라인 요소임을 직접 설정해주어 수정 버튼과 삭제 버튼이 한 줄에 표시되도록 한다
 
 - edit.html
 

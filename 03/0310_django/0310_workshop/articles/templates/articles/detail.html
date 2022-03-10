@@ -10,8 +10,13 @@
 <p>수정일: {{ article.updated_at }}</p>
 
 <div>
-  <a href="{% url 'articles:edit' article.pk %}">EDIT</a>
-  <a href="{% url 'articles:delete' article.pk %}">DELETE</a>
+  <a class="text-decoration-none" href="{% url 'articles:edit' article.pk %}">
+    <button class="p-0 border-0 btn btn-link">EDIT</button>
+  </a>
+  <form class="d-inline" action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="p-0 border-0 btn btn-link">DELETE</button>
+  </form>
 </div>
 <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock content %}
