@@ -83,7 +83,7 @@ table이 DB에 옮겨진다
 
 ### Url 작성
 
-`articles/urls.py`에 `localhost:8000/artticles/` 페이지를 구성하는 다른 url 경로들을 작성해준다
+`articles/urls.py`에 `localhost:8000/articles/` 페이지를 구성하는 다른 url 경로들을 작성해준다
 
 ```python
 from django.urls import path
