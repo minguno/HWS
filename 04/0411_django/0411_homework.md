@@ -28,4 +28,4 @@ from django.contrib.auth.forms import UserCreationForm
 
 ## 3. Django sessions
 
-Django는 사용자가 로그인에 성공할 경우 **(a) Django DB의 django_session** 테이블에 세션 데이터를 저장한다. 그리고 브라우저의 쿠키에 세션 값이 발급되는데 이 세션 값의 key 이름은 **(b) session_id** 이다. 
+Django는 사용자가 로그인에 성공할 경우 **(a)** Django DB의 **django_session** 테이블에 세션 데이터를 저장한다. 그리고 브라우저의 쿠키에 세션 값이 발급되는데 이 세션 값의 key 이름은 **(b) session_id** 이다. 
