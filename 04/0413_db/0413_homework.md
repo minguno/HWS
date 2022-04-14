@@ -42,3 +42,57 @@ class Comment(models.Model):
 
 ## 4. next parameter
 
+```python
+# views.py
+
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Article
+
+@login_required
+@require_POST
+def delete(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    article.delete()
+    return redirect('articles:index')
+
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('articles:index')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect(request.GET.get('next') or 'articles:index')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/login.html', context)
+```
+
+위와 같은 함수가 작성되어 있다. 만약 비로그인 사용자가 삭제를 시도한다면, django는 해당 사용자를 url에 next 파라미터가 붙은 login 페이지로 redirect한다 -> `/accounts/login/?next=/articles/1/delete/`
+
+### 1. redirect된 로그인 페이지에서 로그인에 성공했을 때 발생하는 HTTP response status code를 작성하고 이 오류가 발생한 원인을 작성하시오
+
+`405 Method Not Allowed` 에러가 발생한다. 
+
+next 파라미터에 delete와 article.pk가 포함된 login 페이지에서 로그인 시에는 해당 url로 GET 요청을 보내게 되지만 delete 함수에는 `@require_POST` 속성이 있어 POST 요청에만 동작하기 때문이다.
+
+### 2. 위에서 발생한 오류를 해결하기 위해 다음과 같이 동작하는 코드로 수정하시오.
+
+- 게시글 삭제는 HTTP Post method로만 가능하다
+
+```python
+@login_required
+def delete(request, article_pk):
+    if request.method == 'POST':
+	    article = get_object_or_404(Article, pk=article_pk)
+	    article.delete()
+    return redirect('articles:index')
+```
+
+- 인증되지 않은 사용자가 게시글 삭제를 시도하는 경우, 해당 게시글 상세페이지로 redirect 되도록 한다.
