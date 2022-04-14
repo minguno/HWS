@@ -85,6 +85,7 @@ next 파라미터에 delete와 article.pk가 포함된 login 페이지에서 로
 ### 2. 위에서 발생한 오류를 해결하기 위해 다음과 같이 동작하는 코드로 수정하시오.
 
 - 게시글 삭제는 HTTP Post method로만 가능하다
+- 인증되지 않은 사용자가 게시글 삭제를 시도하는 경우, 해당 게시글 상세페이지로 redirect 되도록 한다.
 
 ```python
 @login_required
@@ -94,5 +95,3 @@ def delete(request, article_pk):
 	    article.delete()
     return redirect('articles:index')
 ```
-
-- 인증되지 않은 사용자가 게시글 삭제를 시도하는 경우, 해당 게시글 상세페이지로 redirect 되도록 한다.
