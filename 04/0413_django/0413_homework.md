@@ -88,8 +88,9 @@ next 파라미터에 delete와 article.pk가 포함된 login 페이지에서 로
 - 인증되지 않은 사용자가 게시글 삭제를 시도하는 경우, 해당 게시글 상세페이지로 redirect 되도록 한다.
 
 ```python
-@login_required
 def delete(request, article_pk):
+    if not request.user.is_authenticated:
+        return redirect('articles:detail', article_pk)
     if request.method == 'POST':
 	    article = get_object_or_404(Article, pk=article_pk)
 	    article.delete()
