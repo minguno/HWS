@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+  .btn-prev:hover {
+    width: fit-content;
+    display: block;
+   
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="w-50 mx-auto my-5">
+  <a href="{% url 'articles:index' %}" class="btn-prev text-dark">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+  </a>
+</header>
+
+<main class="w-50 mx-auto">
+  <div class="my-3">
+    <h1>{{ article.title }}</h1>
+    <small>{{ article.created_at }}</small>
+  </div>
+
+  <p class="my-3">{{ article.content }}</p>
+</main>
+
+<footer class="w-50 mx-auto mb-5 d-flex gap-3 justify-content-end align-items-baseline">
+
+  <form action="{% url 'articles:like' article.pk %}" method="POST">
+    {% csrf_token %}
+
+    {% if request.user in article.like_users.all  %}
+      <button class="btn"><i class="bi bi-heart-fill text-danger"></i></button>
+    {% else %}
+      <button class="btn"><i class="bi bi-heart text-danger"></i></button>
+    {% endif %}
+  </form>
+  <small>{{ article.like_users.count }}명이 이 글을 좋아합니다.</small>
+  <a 
+    href="{% url 'articles:edit' article.pk %}" 
+    class="btn btn-outline-success"
+  >
+    수정하기
+  </a>
+
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger">삭제하기</button>
+  </form>
+
+</footer>
+{% endblock %}

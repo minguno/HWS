@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+  article:hover {
+    color: white;
+    background: linear-gradient(to bottom right, #0ea5e9 50%, white);
+    transition: background 0.2s ease-in-out;
+  }
+
+  .blog-title {
+    position: relative;
+    width: fit-content;
+  }
+
+  .blog-title-underline {
+    z-index: -1;
+    position: absolute;
+    bottom: 5px;
+    background: linear-gradient(to right, #0ea5e9, white);
+    height: 5px;
+    width: 100%;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<main class="w-50 mx-auto mb-5">
+  {% if messages %}
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+  </svg>
+  
+  <ul class="messages list-unstyled">
+      {% for message in messages %}
+      <li 
+        {% if message.tags == 'info' %} 
+          class="alert alert-info"
+        {% elif message.tags == 'error' %}
+          class="alert alert-danger"
+        {% endif %}
+      >
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+        {{ message }}
+      </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  
+  <div class="blog-title">
+    <h1 class="mt-5 fw-bold">Eat, Code, Sleep, and Repeat.</h1>
+    <div class="blog-title-underline"></div>
+  </div>
+  <div class="action-panel d-flex justify-content-between">
+    <a
+      href="{% url 'articles:new' %}" 
+      class="btn btn-outline-dark rounded-circle my-5"
+    >
+      +
+    </a>
+
+    <div class="d-flex gap-3"> 
+      <a
+        href="{% url 'articles:new' %}" 
+        class="btn btn-outline-dark rounded-circle my-5 d-flex align-items-center justify-content-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+      </a>
+      <a
+        href="{% url 'articles:new' %}" 
+        class=" btn btn-outline-dark rounded-circle my-5 d-flex align-items-center justify-content-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  {% for article in articles %}
+    <p>글 제목: {{ article.title }}</p>
+    <p><i class="bi bi-heart-fill text-danger"></i>{{ article.like_users.all.count }}개</p>
+    <a href="{% url 'articles:detail' article.pk %}">DETAIL</a>
+  {% endfor %}
+</main>
+
+{% endblock %}
