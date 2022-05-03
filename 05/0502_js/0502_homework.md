@@ -2,7 +2,7 @@
 
 ## 1. True or False
 
-- JavaScript는 single threaded 언어로 한 번에 한 가지 일 밖에 처리하지 못한다. **(F)**
+- JavaScript는 single threaded 언어로 한 번에 한 가지 일 밖에 처리하지 못한다. **(T)**
   - 자바스크립트의 메인 thread인 이벤트 루프는 single threaded이나, 실행될 때는 웹 브라우저나 NodeJS 같은 multi-threaded 환경에서 실행되기 때문에 비동기 작업을 통해 하나의 작업에 소요되는 런타임 동안 다음 코드를 불러올 수 있다.
 - `setTimeout`은 브라우저의 Web API를 사용하는 함수로, Web API에서 동작이 완료되면 Call Stack에 바로 할당된다. **(F)**
   - Call Stack은 동작을 수행해야 될 작업이 쌓이고 (push) 차례대로 실행 (pop) 하는 곳으로 Web API에게 작업을 넘긴 후 Call Stack에서 제거된다.
